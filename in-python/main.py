@@ -10,6 +10,7 @@ def print_game(game_board):
             print('  -----------')
         x += 1
         r += 1
+    print()
 
 def initialize_game():
     #this is a script to begin the game, assign player names to X and O
@@ -22,7 +23,48 @@ def initialize_game():
     print('\nTo play the game, you enter your move when prompted by typing\nthe column, then the row. For example, to move in the top right;\nEnter: "31"')
     return p1, p2
 
+def prompt_move(player):
+    correct_entry = False
+    while correct_entry == False:
+        try:
+            move = input(f"{player}, please enter your move:\n")
+            move_array = [int(move[0]), int(move[1])]
+            correct_entry = True
+        except:
+            print("Sorry, invalid move entry. Please enter yout move as two numbers, column then row.\nFor example: 32")
+    return move_array
+
+
+#FIXME init main or something
 #p1, p2 = initialize_game()
 p1, p2 = 'j', 't'
 game = game_state(p1, p2)
 print_game(game.game_board)
+
+#initializing variables
+player_turn_check = 2
+player_whos_turn = p1
+player_move = [0, 0] #col, row
+succsesful_move = False
+winner = [False, 'winner_symbol']
+
+while winner[0] == False:
+    if player_turn_check % 2 == 0:
+        player_whos_turn = p1
+    else:
+        player_whos_turn = p2
+
+    player_move = prompt_move(player_whos_turn)
+    while succsesful_move == False:
+        succsesful_move = game.make_move(player_whos_turn, player_move)
+    
+    if succsesful_move == True:
+        player_turn_check += 1
+    
+    winner = game.check_win()
+    print_game(game.game_board)
+
+    succsesful_move = False #reset value to prompt for turn again
+    #winner = [True, 'test run'] #FIXME for testing
+
+print(f"Congrats! Player {winner[1]} wins! Rerun the program to play again.") #FIXME
