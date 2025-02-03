@@ -8,18 +8,18 @@ class game_state:
         col = move[0] - 1
         row = move[1] - 1
         try:
-            if self.game_board[col][row] != ' ':
+            if self.game_board[row][col] != ' ':
                 print("Sorry, invalid move! Please try again.") #FIXME
                 return False #returns false to prompt for another move
             
             if player == self.player1[0]:
                 print("Player one moves, gameboard updated.")
-                self.game_board[col][row] = self.player1[1]
+                self.game_board[row][col] = self.player1[1]
                 return True #returns true to signal succsesful completion
 
             if player == self.player2[0]:
                 print("Player two moves, gameboard updated.")
-                self.game_board[col][row] = self.player2[1]
+                self.game_board[row][col] = self.player2[1]
                 return True #returns true to signal succsesful completion
         except:
             print('Sorry, invalid move! Please try again.')

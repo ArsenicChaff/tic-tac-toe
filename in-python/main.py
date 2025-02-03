@@ -31,7 +31,7 @@ def prompt_move(player):
             move_array = [int(move[0]), int(move[1])]
             correct_entry = True
         except:
-            print("Sorry, invalid move entry. Please enter yout move as two numbers, column then row.\nFor example: 32")
+            print("Sorry, invalid move entry. Please enter your move as two numbers, column then row.\nFor example: 32") #FIXME bubble 1
     return move_array
 
 
