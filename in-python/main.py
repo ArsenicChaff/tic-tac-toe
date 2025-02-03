@@ -61,12 +61,17 @@ while winner[0] == False:
     if succsesful_move == True:
         player_turn_check += 1
     
-    if player_turn_check > 2:
+    if player_turn_check >= 11: # 11 because variable initialized to 2 plus 9 moves
+        winner = [True, 'tie']
+    elif player_turn_check >= 7: # 7 because variable initialized to 2 plus 5 moves minimum before a winner is possible
         winner = game.check_win()
 
     print_game(game.game_board)
 
     succsesful_move = False #reset value to prompt for turn again
 
-player_winner = p1 if winner[1] == 'X' else p2
-print(f"Congrats! Player {player_winner} wins! Rerun the program to play again.")
+if winner[1] == 'tie':
+    print("It's a Tie! Play again to see who wins.")
+else:
+    player_winner = p1 if winner[1] == 'X' else p2
+    print(f"Congrats! Player {player_winner} wins! Rerun the program to play again.")
