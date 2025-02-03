@@ -1,5 +1,11 @@
 from game_class import game_state
 
+def quit_check(var_to_check):
+    if var_to_check.lower().strip() == 'q':
+        print('Exiting program')
+        exit()
+    return
+
 def print_game(game_board):
     r = 1
     x = 1
@@ -16,9 +22,15 @@ def initialize_game():
     #this is a script to begin the game, assign player names to X and O
     start = input('Hello! Welcome to Tic Tac Toe.\nWould you like to play a game? yes[y]/no[n]\n')
     if start.lower().strip() == 'n':
-        return
+        print("Exiting program")
+        exit()
+
+    print("Quit the game at any point by entering 'Q'.")
     p1 = input("The first player will play as X! What is your name?\n")
+    quit_check(p1)
+
     p2 = input("The second player will play as O! What is your name?\n")
+    quit_check(p2)
     
     print('\nTo play the game, you enter your move when prompted by typing\nthe column, then the row. For example, to move in the top right;\nEnter: "31"')
     return p1, p2
@@ -27,17 +39,18 @@ def prompt_move(player):
     correct_entry = False
     while correct_entry == False:
         try:
-            move = input(f"{player}, please enter your move:\n")
+            move = input(f"{player}, please enter your move as two numbers, column then row:\n")
+            if move.lower().strip() == 'q':
+                break
             move_array = [int(move[0]), int(move[1])]
             correct_entry = True
         except:
-            print("Sorry, invalid move entry. Please enter your move as two numbers, column then row.\nFor example: 32") #FIXME bubble 1
+            print("Sorry, invalid move entry. Please enter your move as two numbers, column then row.\nFor example: 32")
+    quit_check(move)
     return move_array
 
 
-#FIXME init main or something
-#p1, p2 = initialize_game()
-p1, p2 = 'j', 't'
+p1, p2 = initialize_game()
 game = game_state(p1, p2)
 print_game(game.game_board)
 
