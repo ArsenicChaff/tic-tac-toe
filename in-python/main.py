@@ -61,10 +61,12 @@ while winner[0] == False:
     if succsesful_move == True:
         player_turn_check += 1
     
-    winner = game.check_win()
+    if player_turn_check > 2:
+        winner = game.check_win()
+
     print_game(game.game_board)
 
     succsesful_move = False #reset value to prompt for turn again
-    #winner = [True, 'test run'] #FIXME for testing
 
-print(f"Congrats! Player {winner[1]} wins! Rerun the program to play again.") #FIXME
+player_winner = p1 if winner[1] == 'X' else p2
+print(f"Congrats! Player {player_winner} wins! Rerun the program to play again.")
