@@ -54,8 +54,8 @@ while winner[0] == False:
     else:
         player_whos_turn = p2
 
-    player_move = prompt_move(player_whos_turn)
     while succsesful_move == False:
+        player_move = prompt_move(player_whos_turn)
         succsesful_move = game.make_move(player_whos_turn, player_move)
     
     if succsesful_move == True:
